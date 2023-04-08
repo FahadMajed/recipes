@@ -14,7 +14,7 @@ void main() {
   );
   test('should get recipes', () async {
     final recipes = await recipesRepo.getRecipes(2);
-    print(recipes.first.rating);
+
     assert(recipes.isNotEmpty);
   });
 }

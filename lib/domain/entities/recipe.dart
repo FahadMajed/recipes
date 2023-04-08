@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Recipe {
   final String name;
   final List<String> instructions;
@@ -38,4 +40,30 @@ class Recipe {
       isFavourite: isFavourite ?? this.isFavourite,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'instructions': instructions,
+      'imageUrl': imageUrl,
+      'rating': rating,
+      'ingredients': ingredients,
+      'isFavourite': isFavourite,
+    };
+  }
+
+  factory Recipe.fromMap(Map<String, dynamic> map) {
+    return Recipe(
+      name: map['name'] ?? '',
+      instructions: List<String>.from(map['instructions']),
+      imageUrl: map['imageUrl'] ?? '',
+      rating: map['rating']?.toInt() ?? 0,
+      ingredients: List<String>.from(map['ingredients']),
+      isFavourite: map['isFavourite'] ?? false,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Recipe.fromJson(String source) => Recipe.fromMap(json.decode(source));
 }
