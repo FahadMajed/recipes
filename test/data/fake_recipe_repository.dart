@@ -1,7 +1,8 @@
 import 'package:recipes/domain/domain.dart';
 
 class FakeRecipesRepository implements RecipesRepostory {
-  final Map<String, Recipe> _recipes = {
+  @override
+  final Map<String, Recipe> recipes = {
     "French Toast": Recipe(name: "French Toast"),
     "Omlete": Recipe(name: "Omlete"),
     "Turkey Breast": Recipe(name: "Turkey Breast"),
@@ -12,11 +13,16 @@ class FakeRecipesRepository implements RecipesRepostory {
   Future<List<Recipe>> getRecipesByTerm(String term) async {
     List<Recipe> matchingRecipes = [];
 
-    for (final key in _recipes.keys) {
+    for (final key in recipes.keys) {
       if (key.toLowerCase().startsWith(term.toLowerCase())) {
-        matchingRecipes.add(_recipes[key]!);
+        matchingRecipes.add(recipes[key]!);
       }
     }
     return matchingRecipes;
+  }
+
+  @override
+  Future<List<Recipe>> getRecipes(int limit) async {
+    return recipes.values.toList();
   }
 }
