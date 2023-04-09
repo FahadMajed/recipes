@@ -6,7 +6,7 @@ const secondayColor = Color(0xffE8D5C4);
 const darkPrimary = Color(0xff175B74);
 const textColor = Color(0xff163F4E);
 const lightPrimary = Color(0xff3A98B9);
-
+final primaryWithOpacity = const Color(0xff3A98B9).withOpacity(0.5);
 const Color backgroundColor = nuteralColor;
 
 const Color darkBlue50 = Color(0xffecf1f9);

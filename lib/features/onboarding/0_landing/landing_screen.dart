@@ -28,9 +28,9 @@ class RecipeHavenLanding extends ConsumerWidget {
           style: largeHeading,
         ),
         const Logo(),
-        const Text(
+        Text(
           'Recipes for every taste and occasion!',
-          style: titleExtraLargeBold,
+          style: titleExtraLarge.copyWith(fontWeight: FontWeight.w600),
           textAlign: TextAlign.center,
         ),
         const Spacer(

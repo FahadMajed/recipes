@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes/domain/domain.dart';
 
 abstract class FavouriteRecipesRepository {
@@ -8,3 +9,6 @@ abstract class FavouriteRecipesRepository {
 
   Future<List<Recipe>> getFavourites();
 }
+
+final favRecipesRepoPvdr =
+    Provider<FavouriteRecipesRepository>((ref) => throw UnimplementedError());

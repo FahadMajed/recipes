@@ -18,7 +18,7 @@ const appBar = TextStyle(
 
 //title large
 const buttomButton = TextStyle(
-  color: Colors.white,
+  color: textColor,
   fontSize: 20,
   fontWeight: FontWeight.w600,
 );

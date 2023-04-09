@@ -32,7 +32,7 @@ class LabelIconText extends StatelessWidget {
         sizedHeight48,
         Text(
           text,
-          style: descMed,
+          style: descMedBold,
           textAlign: TextAlign.center,
         ),
       ],
