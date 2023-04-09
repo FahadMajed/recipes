@@ -11,7 +11,6 @@ class OnboardingViewController extends ViewController with PageViewController {
 
   void onActionButtonPressed() {
     if (page.isLastPage) {
-      Get.to(const MyHomePage(title: ""));
     } else {
       _showNextPage();
     }

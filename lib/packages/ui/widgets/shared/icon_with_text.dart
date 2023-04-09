@@ -7,10 +7,7 @@ enum IconLabelStyle { med, small, large, medBold, smallBold, largeBold }
 final Map<IconLabelStyle, TextStyle> iconLabels = {
   IconLabelStyle.med: iconLabelMid,
   IconLabelStyle.small: iconLabelSmall,
-  IconLabelStyle.large: iconLabelLarge,
-  IconLabelStyle.medBold: iconLabelMidBoldDark,
   IconLabelStyle.smallBold: iconLabelSmallBold,
-  IconLabelStyle.largeBold: iconLabelLargeBold
 };
 
 class IconWithText extends StatelessWidget {

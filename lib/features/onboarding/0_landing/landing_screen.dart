@@ -8,7 +8,7 @@ class RecipeHavenLanding extends ConsumerWidget {
   const RecipeHavenLanding({Key? key}) : super(key: key);
 
   @override
-  Widget build(_, ref) {
+  Widget build(context, ref) {
     final viewController = ref.read(landingCtrlPvdr);
 
     return CustomScaffold(
@@ -17,27 +17,27 @@ class RecipeHavenLanding extends ConsumerWidget {
       withWhiteContainer: false,
       withSafeArea: false,
       resizeToAvoidBottomInset: false,
-      imageFile: "w1.png",
+      imageFile: "bg.png",
       alignment: CrossAxisAlignment.center,
       body: [
         const Spacer(
-          flex: 2,
+          flex: 4,
         ),
-        Text(
-          'ديك',
-          style: reach.copyWith(color: darkPrimary),
-        ),
-        SizedBox(
-            height: 240, child: Image.asset("assets/images/logo no bg.png")),
         const Text(
-          'منبه صلاة فجر يفهمك',
+          'Recipes Haven',
+          style: largeHeading,
+        ),
+        const Logo(),
+        const Text(
+          'Recipes for every taste and occasion!',
           style: titleExtraLargeBold,
+          textAlign: TextAlign.center,
         ),
         const Spacer(
-          flex: 2,
+          flex: 7,
         ),
         FilledBotton(
-          title: "ابدأ!",
+          title: "Start",
           onPressed: viewController.onStart,
         ),
         const Spacer(
@@ -45,5 +45,18 @@ class RecipeHavenLanding extends ConsumerWidget {
         ),
       ],
     );
+  }
+}
+
+class Logo extends StatelessWidget {
+  const Logo({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        height: 200,
+        child: Image.asset("assets/images/ic_twotone-ramen-dining.png"));
   }
 }

@@ -4,9 +4,10 @@ const primaryColor = Color(0xff3A98B9);
 const nuteralColor = Color(0xffFFF1DC);
 const secondayColor = Color(0xffE8D5C4);
 const darkPrimary = Color(0xff175B74);
+const textColor = Color(0xff163F4E);
 const lightPrimary = Color(0xff3A98B9);
 
-const Color backgroundColor = Color(0xFFEEEEEE);
+const Color backgroundColor = nuteralColor;
 
 const Color darkBlue50 = Color(0xffecf1f9);
 
@@ -58,7 +59,7 @@ const iconsColor = accentColor;
 
 const actionIconColor = Colors.blue;
 
-const selectedColor = secondaryColor;
+const selectedColor = primaryColor;
 
 const staticIconsColor = darkBlue700;
 

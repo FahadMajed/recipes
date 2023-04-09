@@ -20,7 +20,7 @@ final favouriteRecipe = Feature(
     label: "Favorite Recipe",
     iconData: Icons.favorite,
     desc:
-        "Never lose track of your favorite recipes again!Save your go-to dishes that's always at your fingertips.");
+        "Never lose track of your favorite recipes again! Save your go-to dishes that's always at your fingertips.");
 final makeTheRecipe = Feature(
     label: "Make The Recipe",
     iconData: Icons.blender,

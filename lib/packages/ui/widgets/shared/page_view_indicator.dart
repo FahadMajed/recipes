@@ -32,9 +32,9 @@ class Indicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
-      margin: const EdgeInsets.symmetric(horizontal: 2.0),
-      height: 12.0,
-      width: 12.0,
+      margin: const EdgeInsets.symmetric(horizontal: 4.0),
+      height: 20.0,
+      width: 20.0,
       decoration: BoxDecoration(
         color: isActive ? selectedColor : Colors.grey[400],
         borderRadius: const BorderRadius.all(Radius.circular(30)),

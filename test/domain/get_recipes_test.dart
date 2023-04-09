@@ -13,7 +13,7 @@ void main() {
       .addFavouriteRecipe(Recipe(name: "French Frise", isFavourite: true)));
   test('should get recieps with favourite status', () async {
     final recipes = await GetRecipes(
-      recipesRepostory: fakeRecipeRepo,
+      recipesRepository: fakeRecipeRepo,
       favouriteRecipesRepository: fakeFavRepo,
     ).call();
 

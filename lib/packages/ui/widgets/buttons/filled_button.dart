@@ -21,7 +21,7 @@ class FilledBotton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: style == FilledBottonStyle.primary ? darkBlue : darkBlue100,
+      color: style == FilledBottonStyle.primary ? primaryColor : secondayColor,
       borderRadius: radius,
       child: MaterialButton(
         onPressed: isLoading ? null : onPressed,
@@ -33,8 +33,8 @@ class FilledBotton extends StatelessWidget {
               )
             : Text(title.tr,
                 style: style == FilledBottonStyle.primary
-                    ? FilledBottonPrimary
-                    : FilledBottonAccent),
+                    ? filledBottonPrimary
+                    : filledBottonAccent),
       ),
     );
   }

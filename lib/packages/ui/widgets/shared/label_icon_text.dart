@@ -23,12 +23,13 @@ class LabelIconText extends StatelessWidget {
           style: titleExtraLargeBold,
           textAlign: TextAlign.center,
         ),
-        sizedHeight12,
+        sizedHeight48,
         Icon(
           iconData,
+          color: darkPrimary,
           size: iconSize96,
         ),
-        sizedHeight24,
+        sizedHeight48,
         Text(
           text,
           style: descMed,

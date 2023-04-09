@@ -37,7 +37,7 @@ class OnBoardingPagesModal extends ConsumerWidget {
                       label: feature.label,
                       iconData: feature.iconData,
                       desc: feature.desc,
-                      buttonTitle: "Next",
+                      buttonTitle: page.isLastPage ? "Browse Recipes!" : "Next",
                       onPressed: viewController.onActionButtonPressed,
                     ),
                 ],
