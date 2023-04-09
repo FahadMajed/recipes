@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes/features/onboarding/1_features/onboarding_controller.dart';
-import 'package:recipes/features/onboarding/onboarding.dart';
 import 'package:recipes/lib.dart';
 import 'package:flutter/material.dart';
 
@@ -26,8 +25,9 @@ class OnBoardingPagesModal extends ConsumerWidget {
           height: 90.h,
           showCross: false,
           children: [
+            sizedHeight32,
             SizedBox(
-              height: 60.h,
+              height: 50.h,
               child: PageView(
                 physics: const ClampingScrollPhysics(),
                 controller: onboardingPageCtrl,
@@ -37,19 +37,20 @@ class OnBoardingPagesModal extends ConsumerWidget {
                       label: feature.label,
                       iconData: feature.iconData,
                       desc: feature.desc,
-                      buttonTitle: page.isLastPage ? "Browse Recipes!" : "Next",
-                      onPressed: viewController.onActionButtonPressed,
                     ),
                 ],
               ),
             ),
-            sizedHeight32,
-            sizedHeight32,
-            sizedHeight32,
             PageViewIndicator(
               numOfPages: page.numberOfPages,
               currentPage: page.currentPage,
             ),
+            sizedHeight32,
+            FilledBotton(
+                title: page.isLastPage ? "Browse Recipes!" : "Next",
+                onPressed: viewController.onActionButtonPressed),
+            sizedHeight32,
+            sizedHeight32,
           ],
         ),
       ),

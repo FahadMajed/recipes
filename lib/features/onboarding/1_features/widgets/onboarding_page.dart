@@ -6,8 +6,6 @@ class OnboardingPage extends StatelessWidget {
   final String label;
   final String desc;
   final Widget? widget;
-  final String buttonTitle;
-  final VoidCallback onPressed;
 
   const OnboardingPage({
     super.key,
@@ -15,8 +13,6 @@ class OnboardingPage extends StatelessWidget {
     required this.label,
     required this.desc,
     this.widget,
-    required this.buttonTitle,
-    required this.onPressed,
   });
 
   @override
@@ -31,10 +27,6 @@ class OnboardingPage extends StatelessWidget {
         sizedHeight48,
         widget ?? Container(),
         sizedHeight32,
-        FilledBotton(
-          title: buttonTitle,
-          onPressed: onPressed,
-        ),
       ],
     );
   }

@@ -23,8 +23,8 @@ class RecipeCard extends StatelessWidget {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 1,
-              blurStyle: BlurStyle.inner,
-              offset: const Offset(0, 3), // changes position of shadow
+              blurStyle: BlurStyle.normal,
+              offset: const Offset(0, 2), // changes position of shadow
             ),
           ],
         ),

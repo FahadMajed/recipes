@@ -76,8 +76,8 @@ abstract class AsyncViewController<T> extends ViewController<AsyncValue<T>> {
 
   void emitLoading() => viewModel = const AsyncLoading();
   void emitData(T data) => viewModel = AsyncData(data);
-  Future<bool> emitError(Error e) async {
-    viewModel = AsyncError(e);
+  Future<bool> emitError(Object? e) async {
+    viewModel = AsyncError(e ?? Object());
     return false;
   }
 }

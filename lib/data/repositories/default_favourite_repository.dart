@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:recipes/lib.dart';
 
-class DeafaultFavouriteRecipesRepository implements FavouriteRecipesRepository {
+class DefaultFavouriteRecipesRepository implements FavouriteRecipesRepository {
   Box get _favsBox => Hive.box("favourite_recipes");
 
   @override

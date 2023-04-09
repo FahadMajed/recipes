@@ -26,9 +26,11 @@ class RecipeDetails extends StatelessWidget {
           RecipeTopics(recipe: recipe),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              RecipeRating(),
-              FavoriteButton(),
+            children: [
+              const RecipeRating(),
+              FavoriteButton(
+                isFavorite: recipe.isFavourite,
+              ),
             ],
           )
         ],

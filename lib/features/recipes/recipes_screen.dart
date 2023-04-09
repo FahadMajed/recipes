@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:recipes/features/recipes/recipes_controller.dart';
 import 'package:recipes/lib.dart';
 
-import 'widgets/recipe_card.dart';
-
-class RecipesScreen extends StatelessWidget {
-  const RecipesScreen({super.key});
-
+class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
+    RecipesController> {
+  _RecipesScreen(super.viewModelProvider, super.viewControllerProvider);
   @override
-  Widget build(BuildContext context) {
+  Widget buildView() {
+    final recipes = viewModel;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -32,7 +33,15 @@ class RecipesScreen extends StatelessWidget {
                 child: ListView(
                   shrinkWrap: true,
                   children: [
-                    for (final recipe in recipes) RecipeCard(recipe: recipe)
+                    ...recipes.when(
+                      data: (recipes) => [
+                        for (final recipe in recipes) RecipeCard(recipe: recipe)
+                      ],
+                      error: (e, __) => [Text(e.toString())],
+                      loading: () => [
+                        const Loading(),
+                      ],
+                    ),
                   ],
                 ),
               )
@@ -42,6 +51,15 @@ class RecipesScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class RecipesScreen extends View {
+  const RecipesScreen({Key? key}) : super(key: key);
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _RecipesScreen(
+        recipesPvdr,
+        recipesCtrlPvdr,
+      );
 }
 
 final recipes = [
