@@ -9,7 +9,7 @@ class ErrorScaffold extends StatelessWidget {
   final Object e;
   @override
   Widget build(BuildContext context) {
-    return ReachScaffold(
+    return CustomScaffold(
       withWhiteContainer: true,
       body: [ErrorWidget(e)],
     );

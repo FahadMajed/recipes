@@ -64,11 +64,17 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: IBM-Sans
+      fonts:
+        - asset: assets/fonts/IBM_Plex_Sans/IBMPlexSans-Light.ttf
+        - asset: assets/fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLight.ttf
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+        - asset: assets/fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf
+        - asset: assets/fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.ttf
+        - asset: assets/fonts/IBM_Plex_Sans/IBMPlexSans-Bold.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

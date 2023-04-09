@@ -83,8 +83,8 @@ abstract class AsyncViewController<T> extends ViewController<AsyncValue<T>> {
 }
 
 mixin PageViewController<T> on ViewController<T> {
-  void onNext() {
-    setPage(pageViewModel.currentPage + 1);
+  void incrementPage() {
+    setPage(page.currentPage + 1);
   }
 
   void onPageChanged(int value) {
@@ -92,19 +92,18 @@ mixin PageViewController<T> on ViewController<T> {
   }
 
   void setPage(int value) {
-    pageViewModel = pageViewModel.copyWith(currentPage: value);
+    page = page.copyWith(currentPage: value);
   }
 
-  StateController<PageViewModel> get pageStateCtrl =>
-      read(pageModelPvdr.notifier);
-  PageViewModel get pageViewModel => pageStateCtrl.state;
-  set pageViewModel(PageViewModel model) => pageStateCtrl.state = model;
+  StateController<PageModel> get pageStateCtrl => read(pageModelPvdr.notifier);
+  PageModel get page => pageStateCtrl.state;
+  set page(PageModel model) => pageStateCtrl.state = model;
 }
 
-class PageViewModel {
+class PageModel {
   final int currentPage;
   final int numberOfPages;
-  const PageViewModel({
+  const PageModel({
     this.currentPage = 0,
     required this.numberOfPages,
   });
@@ -114,16 +113,15 @@ class PageViewModel {
   @override
   List<Object?> get props => [currentPage, numberOfPages];
 
-  PageViewModel copyWith({
+  PageModel copyWith({
     int? currentPage,
     int? numberOfPages,
   }) {
-    return PageViewModel(
+    return PageModel(
       currentPage: currentPage ?? this.currentPage,
       numberOfPages: numberOfPages ?? this.numberOfPages,
     );
   }
 }
 
-final pageModelPvdr =
-    StateProvider((ref) => const PageViewModel(numberOfPages: 0));
+final pageModelPvdr = StateProvider((ref) => const PageModel(numberOfPages: 0));

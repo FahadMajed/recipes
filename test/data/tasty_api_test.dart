@@ -7,14 +7,17 @@ void main() {
     HttpRESTClient(
       baseUrl: 'https://tasty.p.rapidapi.com/recipes',
       headers: {
-        'X-RapidAPI-Key': '',
+        'X-RapidAPI-Key': '0c6fa70ef8mshbde96db4ccc177fp1d9c97jsn905414f1f20b',
         'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
       },
     ),
   );
   test('should get recipes', () async {
-    final recipes = await recipesRepo.getRecipes(2);
-
+    final recipes = await recipesRepo.getRecipes(10);
+    for (final r in recipes) {
+      print(r.name);
+      print(r.topics);
+    }
     assert(recipes.isNotEmpty);
   });
 }

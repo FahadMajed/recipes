@@ -4,7 +4,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sizer/sizer.dart';
 import '../../ui.dart';
 
-class ReachScaffold extends StatelessWidget {
+class CustomScaffold extends StatelessWidget {
   final String? title;
   final PreferredSizeWidget? customAppBar;
 
@@ -31,7 +31,7 @@ class ReachScaffold extends StatelessWidget {
   final bool resizeToAvoidBottomInset;
   final MainAxisAlignment mainAxisAlignment;
   final Color? scaffoldBackgroundColor;
-  ReachScaffold({
+  CustomScaffold({
     Key? key,
     this.title,
     this.customAppBar,

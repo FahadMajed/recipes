@@ -40,7 +40,7 @@ class TastyAPI implements RecipesRepostory {
     List<Recipe> matchingRecipes = [];
 
     for (final key in recipes.keys) {
-      if (key.toLowerCase().startsWith(term.toLowerCase())) {
+      if (key.toLowerCase().contains(term.toLowerCase())) {
         matchingRecipes.add(recipes[key]!);
       }
     }
@@ -49,12 +49,23 @@ class TastyAPI implements RecipesRepostory {
 
   Recipe _fromTasy(Map data) {
     final sections = data["sections"] as List;
-    final name = data["name"];
+    final name = sections[0]["name"] ?? data["name"];
+    final topicsData = data["topics"] as List;
+    final topics = <String>[];
+
+    for (final topicData in topicsData) {
+      //To not get alot of topics
+      // if (topicsData.indexOf(topicData) >= 3) {
+      //   break;
+      // }
+      topics.add(topicData["name"]);
+    }
     final components = sections[0]["components"] as List;
 
     final List<String> ingredients = [];
-
+    final List<String> quantities = [];
     for (final component in components) {
+      quantities.add(component["raw_text"]);
       ingredients.add(component["ingredient"]["display_plural"]);
     }
 
@@ -75,6 +86,7 @@ class TastyAPI implements RecipesRepostory {
         name: name,
         ingredients: ingredients,
         instructions: instructions,
+        topics: topics,
         rating: rating,
         imageUrl: data["thumbnail_url"]);
   }
