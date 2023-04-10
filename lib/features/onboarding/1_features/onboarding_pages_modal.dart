@@ -1,11 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recipes/features/onboarding/1_features/onboarding_controller.dart';
 import 'package:recipes/lib.dart';
 import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
-
-import 'models/feature.dart';
 
 final onboardingPageCtrl = PageController();
 

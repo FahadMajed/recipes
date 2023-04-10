@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:recipes/lib.dart';
 
-class FavoriteButton extends StatelessWidget {
+class FavoriteIconButton extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback onTap;
 
-  const FavoriteButton({
+  const FavoriteIconButton({
     required this.onTap,
     required this.isFavorite,
     super.key,

@@ -73,7 +73,8 @@ class TastyAPI implements RecipesRepostory {
     final List<String> quantities = [];
     for (final component in components) {
       quantities.add(component["raw_text"]);
-      ingredients.add(component["ingredient"]["display_plural"]);
+      ingredients.add(
+          component["ingredient"]["display_plural"].replaceAll("ÀÁÂÃÄÅ", ""));
     }
 
     final instructionsData = data["instructions"] as List;
@@ -81,13 +82,11 @@ class TastyAPI implements RecipesRepostory {
     final List<String> instructions = [];
 
     for (final instruction in instructionsData) {
-      instructions.add(instruction["display_text"]);
+      instructions.add(
+          (instruction["display_text"] as String).replaceAll("ÀÁÂÃÄÅ", ""));
     }
-
-    final rating = (double.tryParse(((data["user_ratings"]["score"] ?? 0 * 100))
-                .toStringAsFixed(2)) ??
-            0.00)
-        .ceil();
+    print(data["user_ratings"]["score"]);
+    final rating = ((data["user_ratings"]["score"] ?? 0 * 100)).toDouble();
 
     return Recipe(
         name: name,

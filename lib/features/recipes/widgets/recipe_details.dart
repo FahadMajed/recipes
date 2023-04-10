@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recipes/features/recipes/recipes_controller.dart';
 import 'package:recipes/lib.dart';
 
 class RecipeDetails extends ConsumerWidget {
@@ -26,11 +25,10 @@ class RecipeDetails extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const RecipeRating(),
-              FavoriteButton(
-                onTap: () {
-                  ref.read(recipesCtrlPvdr).onFavouriteButtonPressed(recipe);
-                },
+              RecipeRating(recipe.rating),
+              FavoriteIconButton(
+                onTap: () =>
+                    ref.read(recipesCtrlPvdr).onFavouriteButtonPressed(recipe),
                 isFavorite: recipe.isFavourite,
               ),
             ],

@@ -6,33 +6,41 @@ class LabelIconText extends StatelessWidget {
   final IconData iconData;
   final String text;
 
+  final TextStyle? labelStyle;
+  final double? iconSize;
+  final TextStyle? descStyle;
+  final SizedBox? spacing;
+
   const LabelIconText({
     Key? key,
     required this.label,
     required this.iconData,
     required this.text,
+    this.labelStyle,
+    this.iconSize,
+    this.descStyle,
+    this.spacing,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        sizedHeight24,
         Text(
           label,
-          style: titleExtraLargeBold,
+          style: labelStyle ?? titleExtraLargeBold,
           textAlign: TextAlign.center,
         ),
-        sizedHeight48,
+        spacing ?? sizedHeight48,
         Icon(
           iconData,
           color: darkPrimary,
-          size: iconSize96,
+          size: iconSize ?? iconSize96,
         ),
-        sizedHeight48,
+        spacing ?? sizedHeight48,
         Text(
           text,
-          style: descMedBold,
+          style: descStyle ?? descMedBold,
           textAlign: TextAlign.center,
         ),
       ],

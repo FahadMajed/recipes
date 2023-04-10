@@ -2,11 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recipes/domain/domain.dart';
-import 'package:recipes/features/features.dart';
-import 'package:recipes/packages/ui/ui.dart';
-
-import 'widgets/recipe_name.dart';
+import 'package:get/get.dart';
+import 'package:recipes/lib.dart';
 
 class RecipeDetailsScreen extends ConsumerWidget {
   Recipe recipe;
@@ -44,7 +41,16 @@ class RecipeDetailsScreen extends ConsumerWidget {
                     sizedHeight16,
                     FilledBotton(
                       title: "Let's Make It!",
-                      onPressed: () {},
+                      onPressed: () {
+                        ref.read(pageModelPvdr.notifier).state = PageModel(
+                          numberOfPages: recipe.ingredients.length + 2,
+                          currentPage: 0,
+                        );
+
+                        Get.to(RecipeInstructionsScreen(
+                          recipe: recipe,
+                        ));
+                      },
                     ),
                     sizedHeight8,
                     _builFavoriteButton(ref),

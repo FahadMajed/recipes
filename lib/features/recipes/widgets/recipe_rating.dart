@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class RecipeRating extends StatelessWidget {
-  const RecipeRating({
+  final double rating;
+  const RecipeRating(
+    this.rating, {
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    print((rating * 100) / 20);
     return RatingBar(
-      initialRating: 3,
+      initialRating: (rating * 100) / 20,
       itemSize: 20,
       glow: false,
       direction: Axis.horizontal,
