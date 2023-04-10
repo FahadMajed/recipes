@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:recipes/features/recipe_details/recipe_details_screen.dart';
 import 'package:recipes/lib.dart';
 
 class RecipeCard extends StatelessWidget {

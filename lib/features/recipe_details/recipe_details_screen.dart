@@ -6,6 +6,8 @@ import 'package:recipes/domain/domain.dart';
 import 'package:recipes/features/features.dart';
 import 'package:recipes/packages/ui/ui.dart';
 
+import 'widgets/recipe_name.dart';
+
 class RecipeDetailsScreen extends ConsumerWidget {
   Recipe recipe;
 
@@ -22,13 +24,7 @@ class RecipeDetailsScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Text(
-                  recipe.name,
-                  style: titleExtraLargeBold,
-                ),
-              ),
+              RecipeName(recipe: recipe),
               sizedHeight8,
               RecipeImage(recipe: recipe),
               Padding(
@@ -40,45 +36,18 @@ class RecipeDetailsScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     sizedHeight8,
-                    const Text(
-                      "Ingredients",
-                      style: titleExtraLarge,
-                    ),
                     RecipeIngredients(recipe: recipe),
                     divider16,
-                    const Text(
-                      "Quantities",
-                      style: titleExtraLarge,
+                    RecipeQuantities(
+                      quantities: recipe.quantities,
                     ),
-                    sizedHeight8,
-                    for (final quantity in recipe.quantities)
-                      Column(
-                        children: [
-                          SelectableText("- $quantity"),
-                          sizedHeight4,
-                        ],
-                      ),
                     sizedHeight16,
                     FilledBotton(
                       title: "Let's Make It!",
                       onPressed: () {},
                     ),
                     sizedHeight8,
-                    StatefulBuilder(builder: (context, setState) {
-                      return FilledBotton(
-                        title: recipe.isFavourite
-                            ? "Remove From Favorites"
-                            : "Add To Favorites",
-                        onPressed: () {
-                          ref
-                              .read(recipesCtrlPvdr)
-                              .onFavouriteButtonPressed(recipe)
-                              .then((updatedRecipe) =>
-                                  setState(() => recipe = updatedRecipe));
-                        },
-                        style: FilledBottonStyle.accent,
-                      );
-                    }),
+                    _builFavoriteButton(ref),
                   ],
                 ),
               ),
@@ -88,4 +57,17 @@ class RecipeDetailsScreen extends ConsumerWidget {
       ),
     );
   }
+
+  Widget _builFavoriteButton(WidgetRef ref) => StatefulBuilder(
+      builder: (_, setState) => FilledBotton(
+            title: recipe.isFavourite
+                ? "Remove From Favorites"
+                : "Add To Favorites",
+            onPressed: () => ref
+                .read(recipesCtrlPvdr)
+                .onFavouriteButtonPressed(recipe)
+                .then(
+                    (updatedRecipe) => setState(() => recipe = updatedRecipe)),
+            style: FilledBottonStyle.accent,
+          ));
 }

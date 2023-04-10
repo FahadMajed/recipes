@@ -11,13 +11,16 @@ class RecipeImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: radius,
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: Image.network(
-          recipe.imageUrl,
-          fit: BoxFit.cover,
+    return Hero(
+      tag: recipe.name,
+      child: ClipRRect(
+        borderRadius: radius,
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Image.network(
+            recipe.imageUrl,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

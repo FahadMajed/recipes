@@ -29,29 +29,3 @@ class RecipeTopics extends StatelessWidget {
     );
   }
 }
-
-class RecipeIngredients extends StatelessWidget {
-  const RecipeIngredients({
-    super.key,
-    required this.recipe,
-  });
-
-  final Recipe recipe;
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8,
-      children: [
-        for (final ingredient in recipe.ingredients)
-          Chip(
-            label: SelectableText(
-              ingredient,
-              style: subtitleMidBold,
-            ),
-            backgroundColor: primaryWithOpacity,
-          )
-      ],
-    );
-  }
-}

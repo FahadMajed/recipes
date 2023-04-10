@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recipes/features/recipes/recipes_controller.dart';
 import 'package:recipes/lib.dart';
 
 class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
