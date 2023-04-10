@@ -40,10 +40,13 @@ class RecipesController extends AsyncViewController<List<Recipe>> {
       } else {
         Toast.success("${updatedRecipe.name} removed from favorites!");
       }
-      return emitData([
+      final updatedRecipes = [
         for (final recipe in recipes)
           if (recipe.name == updatedRecipe.name) updatedRecipe else recipe
-      ]);
+      ];
+
+      read(favsCtrlPvdr).emitData(updatedRecipes);
+      return emitData(updatedRecipes);
     }).onError((error, stackTrace) => emitError(error));
   }
 }

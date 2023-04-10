@@ -10,13 +10,19 @@ class RecipeHavenEntry extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    final isUserCreated = ref.watch(isUserCreatedPvdr);
     return GetMaterialApp(
-        locale: const Locale("en", "US"),
-        navigatorObservers: const [],
-        onInit: () async {},
-        debugShowCheckedModeBanner: false,
-        theme: getThemeData(),
-        home: const RecipeHavenLanding());
+      locale: const Locale("en", "US"),
+      navigatorObservers: const [],
+      onInit: () async {
+        final landingCtrl = ref.read(landingCtrlPvdr);
+        ref.read(isUserCreatedPvdr.notifier).state =
+            await landingCtrl.checkIfUserCreated();
+      },
+      debugShowCheckedModeBanner: false,
+      theme: getThemeData(),
+      home: isUserCreated ? const HomeScreen() : const RecipeHavenLanding(),
+    );
   }
 
   ThemeData getThemeData() {

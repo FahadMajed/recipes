@@ -14,8 +14,14 @@ class DefaultFavouriteRecipesRepository implements FavouriteRecipesRepository {
 
   @override
   Future<List<Recipe>> getFavourites() async {
-    final recipes = _favsBox.values;
-    return recipes.map((e) => Recipe.fromMap(e)).toList();
+    if (favourites.isNotEmpty) {
+      return favourites;
+    } else {
+      final favRecipesData = _favsBox.values;
+      final recipes = favRecipesData.map((e) => Recipe.fromMap(e)).toList();
+      favourites.addAll(recipes);
+      return favourites;
+    }
   }
 
   @override
