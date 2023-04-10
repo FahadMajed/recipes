@@ -84,13 +84,14 @@ class TastyAPI implements RecipesRepostory {
       instructions.add(instruction["display_text"]);
     }
 
-    final rating = (double.tryParse(
-                ((data["user_ratings"]["score"] * 100)).toStringAsFixed(2)) ??
+    final rating = (double.tryParse(((data["user_ratings"]["score"] ?? 0 * 100))
+                .toStringAsFixed(2)) ??
             0.00)
         .ceil();
 
     return Recipe(
         name: name,
+        quantities: quantities,
         ingredients: ingredients,
         instructions: instructions,
         topics: topics,

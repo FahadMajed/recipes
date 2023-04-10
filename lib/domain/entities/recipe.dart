@@ -43,6 +43,7 @@ class Recipe {
       ingredients: ingredients ?? this.ingredients,
       isFavourite: isFavourite ?? this.isFavourite,
       topics: topics,
+      quantities: quantities,
     );
   }
 

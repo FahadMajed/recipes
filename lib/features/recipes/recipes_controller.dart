@@ -33,8 +33,8 @@ class RecipesController extends AsyncViewController<List<Recipe>> {
     }
   }
 
-  Future<void> onFavouriteButtonPressed(Recipe recipe) async {
-    favouriteRecipe.call(recipe).then((updatedRecipe) {
+  Future<Recipe> onFavouriteButtonPressed(Recipe recipe) async {
+    return favouriteRecipe.call(recipe).then((updatedRecipe) {
       if (updatedRecipe.isFavourite) {
         Toast.success("${updatedRecipe.name} is now on your favorites!");
       } else {
@@ -46,8 +46,12 @@ class RecipesController extends AsyncViewController<List<Recipe>> {
       ];
 
       read(favsCtrlPvdr).emitData(updatedRecipes);
-      return emitData(updatedRecipes);
-    }).onError((error, stackTrace) => emitError(error));
+      emitData(updatedRecipes);
+      return updatedRecipe;
+    }).onError((error, stackTrace) {
+      emitError(error);
+      return recipe;
+    });
   }
 }
 

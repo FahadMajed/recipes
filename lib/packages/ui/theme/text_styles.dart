@@ -178,7 +178,7 @@ const subtitleSmallBold = TextStyle(
 const subtitleMidBold = TextStyle(
   fontSize: 11,
   fontWeight: FontWeight.w600,
-  color: Colors.grey,
+  color: textColor,
 );
 
 const selectedText = TextStyle(

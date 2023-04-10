@@ -23,18 +23,28 @@ class FilledBotton extends StatelessWidget {
     return Material(
       color: style == FilledBottonStyle.primary ? primaryColor : secondayColor,
       borderRadius: radius,
-      child: MaterialButton(
-        onPressed: isLoading ? null : onPressed,
-        minWidth: double.infinity,
-        height: 55.0,
-        child: isLoading
-            ? const CircularProgressIndicator(
-                color: Colors.white,
-              )
-            : Text(title.tr,
-                style: style == FilledBottonStyle.primary
-                    ? filledBottonPrimary
-                    : filledBottonAccent),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: radius,
+          border: style == FilledBottonStyle.accent
+              ? Border.all(
+                  color: primaryColor,
+                )
+              : null,
+        ),
+        child: MaterialButton(
+          onPressed: isLoading ? null : onPressed,
+          minWidth: double.infinity,
+          height: 55.0,
+          child: isLoading
+              ? const CircularProgressIndicator(
+                  color: Colors.white,
+                )
+              : Text(title.tr,
+                  style: style == FilledBottonStyle.primary
+                      ? filledBottonPrimary
+                      : filledBottonAccent),
+        ),
       ),
     );
   }
