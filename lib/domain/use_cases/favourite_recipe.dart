@@ -1,5 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes/lib.dart';
-import 'package:recipes/packages/utilities/utilities.dart';
 
 class FavouriteRecipe extends UseCase<Recipe, Recipe> {
   final FavouriteRecipesRepository repository;
@@ -19,3 +19,6 @@ class FavouriteRecipe extends UseCase<Recipe, Recipe> {
     return updatedRecipe;
   }
 }
+
+final favouriteRecipePvdr = Provider(
+    (ref) => FavouriteRecipe(repository: ref.read(favRecipesRepoPvdr)));

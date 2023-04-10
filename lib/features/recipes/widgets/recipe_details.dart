@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:recipes/features/recipes/recipes_controller.dart';
 import 'package:recipes/lib.dart';
 
-import 'recipe_rating.dart';
-import 'recipe_topics.dart';
+class RecipeDetails extends ConsumerWidget {
+  final Recipe recipe;
 
-class RecipeDetails extends StatelessWidget {
   const RecipeDetails({
     super.key,
     required this.recipe,
   });
 
-  final Recipe recipe;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Container(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -29,6 +28,9 @@ class RecipeDetails extends StatelessWidget {
             children: [
               const RecipeRating(),
               FavoriteButton(
+                onTap: () {
+                  ref.read(recipesCtrlPvdr).onFavouriteButtonPressed(recipe);
+                },
                 isFavorite: recipe.isFavourite,
               ),
             ],

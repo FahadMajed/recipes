@@ -15,10 +15,11 @@ class RecipeTopics extends StatelessWidget {
       spacing: 8,
       children: [
         for (final topic in recipe.topics)
-          Chip(
-            label: Text(topic),
-            backgroundColor: primaryWithOpacity,
-          )
+          if (recipe.topics.indexOf(topic) < 3)
+            Chip(
+              label: Text(topic),
+              backgroundColor: primaryWithOpacity,
+            )
       ],
     );
   }

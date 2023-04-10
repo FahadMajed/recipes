@@ -42,6 +42,7 @@ class Recipe {
       rating: rating ?? this.rating,
       ingredients: ingredients ?? this.ingredients,
       isFavourite: isFavourite ?? this.isFavourite,
+      topics: topics,
     );
   }
 
@@ -58,7 +59,7 @@ class Recipe {
     };
   }
 
-  factory Recipe.fromMap(Map<String, dynamic> map) {
+  factory Recipe.fromMap(Map map) {
     return Recipe(
       name: map['name'] ?? '',
       topics: List<String>.from(map["topics"] ?? []),

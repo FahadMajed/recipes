@@ -4,12 +4,16 @@ import 'package:recipes/lib.dart';
 class RecipesController extends AsyncViewController<List<Recipe>> {
   late final GetRecipes getRecipes;
   late final SearchRecipes searchRecipes;
+  late final FavouriteRecipe favouriteRecipe;
 
   RecipesController(super.read) : super(viewModelPvdr: recipesPvdr) {
     getRecipes = read(getRecipesPvdr);
     searchRecipes = read(searchRecipesPvdr);
+    favouriteRecipe = read(favouriteRecipePvdr);
     callGetRecipes();
   }
+
+  List<Recipe> get recipes => viewModelAsData;
 
   Future<void> callGetRecipes() async {
     getRecipes
@@ -27,6 +31,20 @@ class RecipesController extends AsyncViewController<List<Recipe>> {
           .then((recipes) => emitData(recipes))
           .onError((error, stackTrace) => emitError(error));
     }
+  }
+
+  Future<void> onFavouriteButtonPressed(Recipe recipe) async {
+    favouriteRecipe.call(recipe).then((updatedRecipe) {
+      if (updatedRecipe.isFavourite) {
+        Toast.success("${updatedRecipe.name} is now on your favorites!");
+      } else {
+        Toast.success("${updatedRecipe.name} removed from favorites!");
+      }
+      return emitData([
+        for (final recipe in recipes)
+          if (recipe.name == updatedRecipe.name) updatedRecipe else recipe
+      ]);
+    }).onError((error, stackTrace) => emitError(error));
   }
 }
 

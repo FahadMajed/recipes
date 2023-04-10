@@ -51,30 +51,3 @@ class RecipesScreen extends View {
         recipesCtrlPvdr,
       );
 }
-
-final recipes = [
-  Recipe(
-    name: "Pancake With Raspberry",
-    rating: 100,
-    imageUrl:
-        "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/360219.jpg",
-    isFavourite: false,
-    topics: ["Breakfast", "Community Recipe"],
-  ),
-  Recipe(
-    name: "Griddle Stackers",
-    rating: 100,
-    imageUrl:
-        "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/360217.jpg",
-    isFavourite: false,
-    topics: ["Launch", "Vitamens", "Healthy"],
-  ),
-  Recipe(
-    name: "Oroe Chocolate Chips",
-    rating: 75,
-    imageUrl:
-        "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/360213.jpg",
-    isFavourite: true,
-    topics: ["Sweet", "Almonds", "Fast"],
-  ),
-];
