@@ -40,13 +40,13 @@ class RecipeHavenEntry extends ConsumerWidget {
       ),
       snackBarTheme: snackBarTheme,
       inputDecorationTheme: inputDecorationTheme,
-      iconTheme: const IconThemeData(color: secondayColor),
+      iconTheme: const IconThemeData(color: darkPrimary),
       fontFamily: "IBM-Sans",
       primaryColor: primaryColor,
-      primaryIconTheme: const IconThemeData(color: secondayColor),
+      primaryIconTheme: const IconThemeData(color: darkPrimary),
       colorScheme: ColorScheme.fromSeed(
               seedColor: primaryColor,
-              secondary: secondayColor,
+              secondary: lightPrimary,
               background: nuteralColor)
           .copyWith(background: nuteralColor),
     );

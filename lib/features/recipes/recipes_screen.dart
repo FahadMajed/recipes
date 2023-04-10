@@ -1,3 +1,5 @@
+// ignore_for_file: no_logic_in_create_state
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes/features/recipes/recipes_controller.dart';
@@ -9,46 +11,32 @@ class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
   @override
   Widget buildView() {
     final recipes = viewModel;
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Recipes",
+          style: titleExtraLargeBold,
+        ),
+        sizedHeight8,
+        const SearchBar(),
+        sizedHeight16,
+        Expanded(
+          child: ListView(
+            shrinkWrap: true,
             children: [
-              const Text(
-                "Recipes",
-                style: titleExtraLargeBold,
+              ...recipes.when(
+                data: (recipes) =>
+                    [for (final recipe in recipes) RecipeCard(recipe: recipe)],
+                error: (e, __) => [Text(e.toString())],
+                loading: () => [
+                  const Loading(),
+                ],
               ),
-              sizedHeight8,
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                    color: secondayColor,
-                    borderRadius: radius,
-                    border: Border.all(width: 1)),
-              ),
-              sizedHeight16,
-              Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    ...recipes.when(
-                      data: (recipes) => [
-                        for (final recipe in recipes) RecipeCard(recipe: recipe)
-                      ],
-                      error: (e, __) => [Text(e.toString())],
-                      loading: () => [
-                        const Loading(),
-                      ],
-                    ),
-                  ],
-                ),
-              )
             ],
           ),
-        ),
-      ),
+        )
+      ],
     );
   }
 }

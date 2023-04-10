@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:recipes/features/recipes/recipes_screen.dart';
 import 'package:recipes/packages/utilities/utilities.dart';
 
+import '../../home/home_screen.dart';
 import 'onboarding_pages_modal.dart';
 
 class OnboardingViewController extends ViewController with PageViewController {
@@ -10,7 +10,7 @@ class OnboardingViewController extends ViewController with PageViewController {
 
   void onActionButtonPressed() {
     if (page.isLastPage) {
-      Get.to(const RecipesScreen());
+      Get.offAll(const HomeScreen());
     } else {
       _showNextPage();
     }

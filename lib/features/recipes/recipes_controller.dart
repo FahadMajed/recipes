@@ -20,3 +20,5 @@ final recipesCtrlPvdr = Provider((ref) => RecipesController(ref.read));
 
 final recipesPvdr = StateProvider<AsyncValue<List<Recipe>>>(
     (ref) => const AsyncLoading<List<Recipe>>());
+
+final selectedDestPvdr = StateProvider((ref) => 0);
