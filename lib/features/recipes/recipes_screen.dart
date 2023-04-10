@@ -19,7 +19,9 @@ class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
           style: titleExtraLargeBold,
         ),
         sizedHeight8,
-        const SearchBar(),
+        SearchBar(
+          onSearchTermChanged: viewController.onSearchTermChanged,
+        ),
         sizedHeight16,
         Expanded(
           child: ListView(

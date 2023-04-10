@@ -3,17 +3,19 @@ import 'package:recipes/lib.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({
+    required this.onSearchTermChanged,
     super.key,
   });
 
+  final Function(String?) onSearchTermChanged;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 45,
-      decoration: BoxDecoration(
-          color: secondayColor,
-          borderRadius: radius,
-          border: Border.all(width: 1)),
+      child: CustomTextField(
+        hintText: "Search",
+        onChanged: onSearchTermChanged,
+      ),
     );
   }
 }

@@ -10,29 +10,36 @@ class TastyAPI implements RecipesRepostory {
   @override
   final Map<String, Recipe> recipes = {};
 
+  final fetchedIndexes = [];
+
   @override
-  Future<List<Recipe>> getRecipes(int limit) async {
-    final response = await client.call(
-      RESTOption.get,
-      path: '/list',
-      headers: client.headers,
-      body: {
-        'from': 0.toString(),
-        'size': limit.toString(),
-      },
-    );
+  Future<List<Recipe>> getRecipes(int end) async {
+    if (fetchedIndexes.contains(end)) {
+      return recipes.values.toList();
+    } else {
+      final response = await client.call(
+        RESTOption.get,
+        path: '/list',
+        headers: client.headers,
+        body: {
+          'from': 0.toString(),
+          'size': end.toString(),
+        },
+      );
 
-    final results = (response["results"] as List)
-      ..removeWhere((result) => result.containsKey('sections') == false);
+      final results = (response["results"] as List)
+        ..removeWhere((result) => result.containsKey('sections') == false);
 
-    final List<Recipe> recipes = results.map((e) => _fromTasy(e)).toList();
+      final List<Recipe> recipes = results.map((e) => _fromTasy(e)).toList();
 
-    //caching
-    for (final recipe in recipes) {
-      this.recipes[recipe.name] = recipe;
+      //caching
+      for (final recipe in recipes) {
+        this.recipes[recipe.name] = recipe;
+      }
+      fetchedIndexes.add(end);
+
+      return recipes;
     }
-
-    return recipes;
   }
 
   @override

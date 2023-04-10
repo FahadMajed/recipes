@@ -60,12 +60,13 @@ class CustomTextField extends StatelessWidget {
       obscureText: isObscure,
       decoration: InputDecoration(
         alignLabelWithHint: true,
+
         labelText: labelText?.tr,
         labelStyle: descMed,
         suffixIcon: suffixIcon,
         // hintStyle: hintStyle == null ? descSmall : hintStyle,
         filled: true,
-        fillColor: Colors.white,
+        fillColor: secondayColor,
         border: const OutlineInputBorder(
           borderRadius: radius,
           borderSide: BorderSide(color: Colors.black, width: 0.5),

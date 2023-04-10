@@ -3,8 +3,11 @@ import 'package:recipes/lib.dart';
 
 class RecipesController extends AsyncViewController<List<Recipe>> {
   late final GetRecipes getRecipes;
+  late final SearchRecipes searchRecipes;
+
   RecipesController(super.read) : super(viewModelPvdr: recipesPvdr) {
     getRecipes = read(getRecipesPvdr);
+    searchRecipes = read(searchRecipesPvdr);
     callGetRecipes();
   }
 
@@ -13,6 +16,17 @@ class RecipesController extends AsyncViewController<List<Recipe>> {
         .call()
         .then((recipes) => emitData(recipes))
         .onError((error, stackTrace) => emitError(error));
+  }
+
+  Future<void> onSearchTermChanged(String? term) async {
+    if (term == null || term.isEmpty) {
+      callGetRecipes();
+    } else {
+      searchRecipes
+          .call(term)
+          .then((recipes) => emitData(recipes))
+          .onError((error, stackTrace) => emitError(error));
+    }
   }
 }
 
