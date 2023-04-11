@@ -22,7 +22,7 @@ class TastyAPI implements RecipesRepostory {
         path: '/list',
         headers: client.headers,
         body: {
-          'from': 0.toString(),
+          'from': (end - 20).toString(),
           'size': end.toString(),
         },
       );

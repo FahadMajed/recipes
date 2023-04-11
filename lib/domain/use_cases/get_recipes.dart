@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipes/domain/domain.dart';
 import 'package:recipes/packages/utilities/utilities.dart';
 
-class GetRecipes extends NoRequestUseCase<List<Recipe>> {
+class GetRecipes extends UseCase<int, List<Recipe>> {
   final RecipesRepostory recipesRepository;
   final FavouriteRecipesRepository favouriteRecipesRepository;
 
@@ -12,8 +12,9 @@ class GetRecipes extends NoRequestUseCase<List<Recipe>> {
   });
 
   @override
-  Future<List<Recipe>> call() async {
-    final recipes = await recipesRepository.getRecipes(5);
+  // ignore: avoid_renaming_method_parameters
+  Future<List<Recipe>> call(int end) async {
+    final recipes = await recipesRepository.getRecipes(end);
     final favouriteRecipes = await favouriteRecipesRepository.getFavourites();
     final favouritesNames = [
       for (final recipe in favouriteRecipes) recipe.name

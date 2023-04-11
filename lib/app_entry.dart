@@ -17,11 +17,15 @@ class RecipeHavenEntry extends ConsumerWidget {
       onInit: () async {
         final landingCtrl = ref.read(landingCtrlPvdr);
         ref.read(isUserCreatedPvdr.notifier).state =
-            await landingCtrl.checkIfUserCreated();
+            AsyncData(await landingCtrl.checkIfUserCreated());
       },
       debugShowCheckedModeBanner: false,
       theme: getThemeData(),
-      home: isUserCreated ? const HomeScreen() : const RecipeHavenLanding(),
+      home: isUserCreated.when(
+          data: (isUserCreated) =>
+              isUserCreated ? const HomeScreen() : const RecipeHavenLanding(),
+          error: (_, __) => const Text("Error"),
+          loading: () => const LoadingScaffold()),
     );
   }
 

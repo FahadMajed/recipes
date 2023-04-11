@@ -15,7 +15,7 @@ void main() {
     final recipes = await GetRecipes(
       recipesRepository: fakeRecipeRepo,
       favouriteRecipesRepository: fakeFavRepo,
-    ).call();
+    ).call(5);
 
     expect(recipes.first.isFavourite, true);
     assert(recipes.length > 2);

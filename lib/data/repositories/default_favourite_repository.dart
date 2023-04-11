@@ -9,6 +9,7 @@ class DefaultFavouriteRecipesRepository implements FavouriteRecipesRepository {
 
   @override
   Future<void> addFavouriteRecipe(Recipe recipe) async {
+    favourites.add(recipe);
     _favsBox.put(recipe.name, recipe.toMap());
   }
 
@@ -27,5 +28,15 @@ class DefaultFavouriteRecipesRepository implements FavouriteRecipesRepository {
   @override
   void removeFavouriteRecipe(Recipe recipe) {
     _favsBox.delete(recipe.name);
+    favourites.removeWhere((r) => r.name == recipe.name);
+  }
+
+  @override
+  bool isRecipeFavorited(String name) {
+    final recipe = favourites.firstWhere(
+      (recipe) => recipe.name == name,
+      orElse: () => Recipe(name: "", isFavourite: false),
+    );
+    return recipe.isFavourite;
   }
 }

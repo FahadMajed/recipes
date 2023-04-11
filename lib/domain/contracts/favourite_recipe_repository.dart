@@ -8,6 +8,8 @@ abstract class FavouriteRecipesRepository {
   void removeFavouriteRecipe(Recipe recipe);
 
   Future<List<Recipe>> getFavourites();
+
+  bool isRecipeFavorited(String name);
 }
 
 final favRecipesRepoPvdr =

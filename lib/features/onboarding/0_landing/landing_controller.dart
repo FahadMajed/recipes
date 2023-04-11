@@ -27,6 +27,7 @@ class LandingController extends ViewController with PageViewController {
   }
 }
 
-final isUserCreatedPvdr = StateProvider((ref) => false);
+final isUserCreatedPvdr =
+    StateProvider<AsyncValue<bool>>((ref) => const AsyncLoading<bool>());
 
 final landingCtrlPvdr = Provider((ref) => LandingController(ref.read));

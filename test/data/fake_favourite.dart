@@ -17,4 +17,10 @@ class FakeFavouriteRecipesRepository implements FavouriteRecipesRepository {
   Future<List<Recipe>> getFavourites() async {
     return favourites;
   }
+
+  @override
+  bool isRecipeFavorited(String name) {
+    // TODO: implement isRecipeFavorited
+    throw UnimplementedError();
+  }
 }

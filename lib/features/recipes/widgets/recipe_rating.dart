@@ -10,7 +10,6 @@ class RecipeRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print((rating * 100) / 20);
     return RatingBar(
       initialRating: (rating * 100) / 20,
       itemSize: 20,

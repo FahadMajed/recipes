@@ -6,7 +6,7 @@ abstract class RecipesRepostory {
 
   Future<List<Recipe>> getRecipesByTerm(String term);
 
-  Future<List<Recipe>> getRecipes(int limit);
+  Future<List<Recipe>> getRecipes(int end);
 }
 
 final recipesRepoPvdr =
