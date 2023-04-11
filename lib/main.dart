@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:recipes/app_entry.dart';
+import 'package:recipes/config/config.dart';
 import 'package:recipes/lib.dart';
 import 'package:rest_api/dio_rest_client.dart';
 import 'package:sizer/sizer.dart';
@@ -10,7 +11,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox("user");
   await Hive.openBox("favourite_recipes");
-
+  await ConfigReader.initialize();
   runApp(
     Sizer(
       builder: (_, __, ___) => ProviderScope(
@@ -20,8 +21,7 @@ void main() async {
               DioRESTClient(
                 baseUrl: 'https://tasty.p.rapidapi.com/recipes',
                 headers: {
-                  'X-RapidAPI-Key':
-                      '0c6fa70ef8mshbde96db4ccc177fp1d9c97jsn905414f1f20b',
+                  'X-RapidAPI-Key': ConfigReader.getRapidAPIKey(),
                   'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
                 },
               ),
