@@ -8,12 +8,10 @@ final instructionsPageCtrl = PageController();
 class RecipeInstructionsScreen extends ConsumerWidget {
   final Recipe recipe;
 
-  RecipeInstructionsScreen({
+  const RecipeInstructionsScreen({
     required this.recipe,
     super.key,
-  }) {
-    recipe.instructions.removeLast();
-  }
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,10 +32,11 @@ class RecipeInstructionsScreen extends ConsumerWidget {
                 controller: instructionsPageCtrl,
                 children: [
                   for (final instruction in recipe.instructions)
-                    Instruction(
-                      instruction: instruction,
-                      index: recipe.instructions.indexOf(instruction) + 1,
-                    ),
+                    if (instruction != recipe.instructions.last)
+                      Instruction(
+                        instruction: instruction,
+                        index: recipe.instructions.indexOf(instruction) + 1,
+                      ),
                   LabelIconText(
                       label: "You Are Done!",
                       labelStyle: titleMidBold,

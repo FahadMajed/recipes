@@ -13,19 +13,44 @@ class RecipesController extends AsyncViewController<List<Recipe>> {
     getRecipes = read(getRecipesPvdr);
     searchRecipes = read(searchRecipesPvdr);
     favouriteRecipe = read(favouriteRecipePvdr);
-    callGetRecipes(20);
+    callGetRecipes();
   }
 
   List<Recipe> get recipes => viewModelAsData;
 
   bool get hasSearched => searchCtrl.text.isNotEmpty;
 
-  Future<void> callGetRecipes(int end) async {
-    getRecipes
-        .call(end)
-        .then((recipes) => emitData(recipes))
-        .onError((error, stackTrace) => emitError(error));
+  bool get isRefreshing => read(isRefreshingPvdr);
+
+  int get _from => read(fromPvdr);
+
+  Future<void> callGetRecipes({bool isRefreshing = false}) async {
+    if (this.isRefreshing) {
+      //TO AVOID MULTIPLE CALLS
+      return;
+    }
+
+    if (isRefreshing) {
+      _incrementStart();
+      _toggleRefreshing();
+      final currentRecipes = recipes;
+
+      getRecipes.call(_from).then((newRecipes) {
+        _toggleRefreshing();
+        return emitData([...currentRecipes, ...newRecipes]);
+      }).onError((error, stackTrace) => emitError(error));
+    } else {
+      getRecipes
+          .call(_from)
+          .then((recipes) => emitData(recipes))
+          .onError((error, stackTrace) => emitError(error));
+    }
   }
+
+  void _incrementStart() => read(fromPvdr.notifier).state = _from + 21;
+
+  void _toggleRefreshing() =>
+      read(isRefreshingPvdr.notifier).state = !isRefreshing;
 
   Future<void> onSearchTermChanged(String? term) async => searchRecipes
       .call(term ?? "")
@@ -61,3 +86,7 @@ final recipesPvdr = StateProvider<AsyncValue<List<Recipe>>>(
 final searchedRecipesPvdr = StateProvider<List<Recipe>>((ref) => []);
 
 final selectedDestPvdr = StateProvider((ref) => 0);
+
+final fromPvdr = StateProvider((ref) => 0);
+
+final isRefreshingPvdr = StateProvider((ref) => false);

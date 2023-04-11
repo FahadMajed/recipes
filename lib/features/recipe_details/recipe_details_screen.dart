@@ -43,7 +43,7 @@ class RecipeDetailsScreen extends ConsumerWidget {
                       title: "Let's Make It!",
                       onPressed: () {
                         ref.read(pageModelPvdr.notifier).state = PageModel(
-                          numberOfPages: recipe.ingredients.length + 2,
+                          numberOfPages: recipe.instructions.length,
                           currentPage: 0,
                         );
 

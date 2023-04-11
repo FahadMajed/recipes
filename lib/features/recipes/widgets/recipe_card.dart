@@ -17,7 +17,7 @@ class RecipeCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 16.0),
         child: Container(
-          height: 336,
+          constraints: const BoxConstraints(minHeight: 336, maxHeight: 410),
           decoration: BoxDecoration(
             color: secondayColor,
             borderRadius: radius,
@@ -33,6 +33,7 @@ class RecipeCard extends StatelessWidget {
           ),
           width: double.infinity,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               RecipeImage(recipe: recipe),

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:recipes/app_entry.dart';
 import 'package:recipes/lib.dart';
-import 'package:rest_api/http_rest_client.dart';
+import 'package:rest_api/dio_rest_client.dart';
 import 'package:sizer/sizer.dart';
 
 void main() async {
@@ -17,7 +17,7 @@ void main() async {
         overrides: [
           recipesRepoPvdr.overrideWithValue(
             TastyAPI(
-              HttpRESTClient(
+              DioRESTClient(
                 baseUrl: 'https://tasty.p.rapidapi.com/recipes',
                 headers: {
                   'X-RapidAPI-Key': '',

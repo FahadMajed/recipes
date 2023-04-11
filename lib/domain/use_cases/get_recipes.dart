@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:recipes/domain/domain.dart';
 import 'package:recipes/packages/utilities/utilities.dart';
 
@@ -13,17 +14,26 @@ class GetRecipes extends UseCase<int, List<Recipe>> {
 
   @override
   // ignore: avoid_renaming_method_parameters
-  Future<List<Recipe>> call(int end) async {
-    final recipes = await recipesRepository.getRecipes(end);
-    final favouriteRecipes = await favouriteRecipesRepository.getFavourites();
-    final favouritesNames = [
-      for (final recipe in favouriteRecipes) recipe.name
-    ];
-
-    recipes.removeWhere((r) => favouritesNames.contains(r.name));
-
-    return [...favouriteRecipes, ...recipes];
+  Future<List<Recipe>> call(int from) async {
+    await favouriteRecipesRepository.getFavourites();
+    final recipes = await recipesRepository.getRecipes(from);
+    return recipes
+        .map((recipe) =>
+            favouriteRecipesRepository.isRecipeFavorited(recipe.name)
+                ? recipe.copyWith(isFavourite: true)
+                : recipe)
+        .toList();
   }
+}
+
+class GetRecipesRequest {
+  final int from;
+
+  final bool isRefreshing;
+  GetRecipesRequest({
+    required this.from,
+    required this.isRefreshing,
+  });
 }
 
 final getRecipesPvdr = Provider((ref) => GetRecipes(

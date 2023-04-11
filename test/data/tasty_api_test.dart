@@ -13,11 +13,8 @@ void main() {
     ),
   );
   test('should get recipes', () async {
-    final recipes = await recipesRepo.getRecipes(10);
-    for (final r in recipes) {
-      print(r.name);
-      print(r.topics);
-    }
+    final recipes = await recipesRepo.getRecipes(0);
+
     assert(recipes.isNotEmpty);
   });
 }

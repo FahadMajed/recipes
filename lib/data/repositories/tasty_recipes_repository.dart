@@ -13,18 +13,14 @@ class TastyAPI implements RecipesRepostory {
   final fetchedIndexes = [];
 
   @override
-  Future<List<Recipe>> getRecipes(int end) async {
-    if (fetchedIndexes.contains(end)) {
+  Future<List<Recipe>> getRecipes(int from) async {
+    if (fetchedIndexes.contains(from)) {
       return recipes.values.toList();
     } else {
       final response = await client.call(
         RESTOption.get,
-        path: '/list',
+        path: '/list?from=$from&size=20',
         headers: client.headers,
-        body: {
-          'from': (end - 20).toString(),
-          'size': end.toString(),
-        },
       );
 
       final results = (response["results"] as List)
@@ -36,7 +32,7 @@ class TastyAPI implements RecipesRepostory {
       for (final recipe in recipes) {
         this.recipes[recipe.name] = recipe;
       }
-      fetchedIndexes.add(end);
+      fetchedIndexes.add(from);
 
       return recipes;
     }
@@ -85,7 +81,7 @@ class TastyAPI implements RecipesRepostory {
       instructions.add(
           (instruction["display_text"] as String).replaceAll("ÀÁÂÃÄÅ", ""));
     }
-    print(data["user_ratings"]["score"]);
+
     final rating = ((data["user_ratings"]["score"] ?? 0 * 100)).toDouble();
 
     return Recipe(

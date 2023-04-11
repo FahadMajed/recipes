@@ -15,9 +15,10 @@ void main() {
     final recipes = await GetRecipes(
       recipesRepository: fakeRecipeRepo,
       favouriteRecipesRepository: fakeFavRepo,
-    ).call(5);
+    ).call(0);
 
-    expect(recipes.first.isFavourite, true);
+    expect(
+        recipes.firstWhere((r) => r.name == "French Frise").isFavourite, true);
     assert(recipes.length > 2);
   });
 }

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:recipes/lib.dart';
 
 class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
@@ -10,7 +11,6 @@ class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
 
   ScrollController scrollController = ScrollController();
 
-  int end = 20;
   @override
   void initState() {
     super.initState();
@@ -22,7 +22,7 @@ class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
     scrollController.addListener(() async {
       if (scrollController.position.maxScrollExtent ==
           scrollController.position.pixels) {
-        viewController.callGetRecipes(end);
+        viewController.callGetRecipes(isRefreshing: true);
       }
     });
   }
@@ -31,6 +31,7 @@ class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
   Widget buildView() {
     final recipes = viewModel;
     final searchedRecipes = ref.watch(searchedRecipesPvdr);
+    final isRefreshing = ref.watch(isRefreshingPvdr);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +50,7 @@ class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
           child: RefreshIndicator(
             backgroundColor: secondayColor,
             onRefresh: () async {
-//viewController.callGetRecipes
+              //viewController.callGetRecipes
             },
             child: ListView(
               shrinkWrap: true,
@@ -60,12 +61,13 @@ class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
                     const Text('No Recipes Found')
                   else ...[
                     for (final recipe in searchedRecipes)
-                      RecipeCard(recipe: recipe)
+                      RecipeCard(recipe: recipe),
                   ]
                 ] else
                   ...recipes.when(
                     data: (recipes) => [
-                      for (final recipe in recipes) RecipeCard(recipe: recipe)
+                      for (final recipe in recipes) RecipeCard(recipe: recipe),
+                      if (isRefreshing) const Refreshing()
                     ],
                     error: (e, __) => [Text(e.toString())],
                     loading: () => [
@@ -75,6 +77,24 @@ class _RecipesScreen extends ViewState<RecipesScreen, AsyncValue<List<Recipe>>,
               ],
             ),
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class Refreshing extends StatelessWidget {
+  const Refreshing({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        Loading(),
+        SizedBox(
+          height: 50,
         )
       ],
     );

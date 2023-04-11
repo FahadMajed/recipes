@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recipes/features/favorites/favorites_screen.dart';
-import 'package:recipes/features/recipes/recipes_controller.dart';
 import 'package:recipes/lib.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -10,6 +8,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedDest = ref.watch(selectedDestPvdr);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
