@@ -20,7 +20,8 @@ void main() async {
               DioRESTClient(
                 baseUrl: 'https://tasty.p.rapidapi.com/recipes',
                 headers: {
-                  'X-RapidAPI-Key': '',
+                  'X-RapidAPI-Key':
+                      '0c6fa70ef8mshbde96db4ccc177fp1d9c97jsn905414f1f20b',
                   'X-RapidAPI-Host': 'tasty.p.rapidapi.com',
                 },
               ),
