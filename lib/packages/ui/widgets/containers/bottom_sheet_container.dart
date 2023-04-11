@@ -76,7 +76,7 @@ class BottomSheetScrollable extends StatelessWidget {
 }
 
 bsDecoration() => const BoxDecoration(
-      color: Colors.white,
+      color: backgroundColor,
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(20.0),
         topRight: Radius.circular(20.0),

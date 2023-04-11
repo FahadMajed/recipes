@@ -10,29 +10,32 @@ class TastyAPI implements RecipesRepostory {
   @override
   final Map<String, Recipe> recipes = {};
 
+  final fetchedIndexes = [];
+
   @override
-  Future<List<Recipe>> getRecipes(int limit) async {
-    final response = await client.call(
-      RESTOption.get,
-      path: '/list',
-      headers: client.headers,
-      body: {
-        'from': 0.toString(),
-        'size': limit.toString(),
-      },
-    );
+  Future<List<Recipe>> getRecipes(int from) async {
+    if (fetchedIndexes.contains(from)) {
+      return recipes.values.toList();
+    } else {
+      final response = await client.call(
+        RESTOption.get,
+        path: '/list?from=$from&size=20',
+        headers: client.headers,
+      );
 
-    final results = (response["results"] as List)
-      ..removeWhere((result) => result.containsKey('sections') == false);
+      final results = (response["results"] as List)
+        ..removeWhere((result) => result.containsKey('sections') == false);
 
-    final List<Recipe> recipes = results.map((e) => _fromTasy(e)).toList();
+      final List<Recipe> recipes = results.map((e) => _fromTasy(e)).toList();
 
-    //caching
-    for (final recipe in recipes) {
-      this.recipes[recipe.name] = recipe;
+      //caching
+      for (final recipe in recipes) {
+        this.recipes[recipe.name] = recipe;
+      }
+      fetchedIndexes.add(from);
+
+      return recipes;
     }
-
-    return recipes;
   }
 
   @override
@@ -66,7 +69,8 @@ class TastyAPI implements RecipesRepostory {
     final List<String> quantities = [];
     for (final component in components) {
       quantities.add(component["raw_text"]);
-      ingredients.add(component["ingredient"]["display_plural"]);
+      ingredients.add(
+          component["ingredient"]["display_plural"].replaceAll("ÀÁÂÃÄÅ", ""));
     }
 
     final instructionsData = data["instructions"] as List;
@@ -74,16 +78,15 @@ class TastyAPI implements RecipesRepostory {
     final List<String> instructions = [];
 
     for (final instruction in instructionsData) {
-      instructions.add(instruction["display_text"]);
+      instructions.add(
+          (instruction["display_text"] as String).replaceAll("ÀÁÂÃÄÅ", ""));
     }
 
-    final rating = (double.tryParse(
-                ((data["user_ratings"]["score"] * 100)).toStringAsFixed(2)) ??
-            0.00)
-        .ceil();
+    final rating = ((data["user_ratings"]["score"] ?? 0 * 100)).toDouble();
 
     return Recipe(
         name: name,
+        quantities: quantities,
         ingredients: ingredients,
         instructions: instructions,
         topics: topics,

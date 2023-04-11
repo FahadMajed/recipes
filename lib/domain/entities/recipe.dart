@@ -5,7 +5,7 @@ class Recipe {
   final List<String> topics;
   final List<String> instructions;
   final String imageUrl;
-  final int rating;
+  final double rating;
   final List<String> ingredients;
   final List<String> quantities;
   final bool isFavourite;
@@ -31,7 +31,7 @@ class Recipe {
     String? name,
     List<String>? instructions,
     String? imageUrl,
-    int? rating,
+    double? rating,
     List<String>? ingredients,
     bool? isFavourite,
   }) {
@@ -42,6 +42,8 @@ class Recipe {
       rating: rating ?? this.rating,
       ingredients: ingredients ?? this.ingredients,
       isFavourite: isFavourite ?? this.isFavourite,
+      topics: topics,
+      quantities: quantities,
     );
   }
 
@@ -58,13 +60,13 @@ class Recipe {
     };
   }
 
-  factory Recipe.fromMap(Map<String, dynamic> map) {
+  factory Recipe.fromMap(Map map) {
     return Recipe(
       name: map['name'] ?? '',
       topics: List<String>.from(map["topics"] ?? []),
       instructions: List<String>.from(map['instructions'] ?? []),
       imageUrl: map['imageUrl'] ?? '',
-      rating: map['rating']?.toInt() ?? 0,
+      rating: map['rating']?.toDouble() ?? 0.0,
       ingredients: List<String>.from(map['ingredients'] ?? []),
       quantities: List<String>.from(map['quantities'] ?? []),
       isFavourite: map['isFavourite'] ?? false,

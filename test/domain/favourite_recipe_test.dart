@@ -8,7 +8,7 @@ void main() {
   final repository = FakeRecipesRepository();
 
   Future<Recipe> getFrenchToast() async {
-    final recipes = await repository.getRecipes(2);
+    final recipes = await repository.getRecipes(0);
     final frenchToastIndex =
         recipes.indexWhere((r) => r.name == "French Toast");
     return recipes[frenchToastIndex];

@@ -24,7 +24,10 @@ class EmptyStateContainer extends StatelessWidget {
         sizedHeight24,
         Text(
           text.tr,
-          style: titleLargeBold.copyWith(color: Colors.black87),
+          style: titleLargeBold.copyWith(
+            color: Colors.black87,
+            fontWeight: FontWeight.normal,
+          ),
           textAlign: TextAlign.center,
         ),
         sizedHeight24,

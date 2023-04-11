@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:recipes/packages/ui/theme/text_styles.dart';
 
 class Toast {
   static void success(
     String message, {
     bool pop = false,
+    bool isModalOpen = false,
     int times = 1,
     Function()? toggler,
   }) {
-    ScaffoldMessenger.of(Get.context!).showSnackBar(
+    final ctx = isModalOpen ? Get.overlayContext! : Get.context!;
+    const onSuccess = TextStyle(
+        color: Color.fromARGB(255, 11, 66, 13),
+        fontSize: 14,
+        fontWeight: FontWeight.w500);
+
+    ScaffoldMessenger.of(ctx).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 4),
         margin: const EdgeInsets.all(16),
@@ -49,6 +55,11 @@ class Toast {
     if (pop) {
       Get.close(times);
     }
+    const onFail = TextStyle(
+        color: Color.fromARGB(255, 75, 15, 11),
+        fontSize: 14,
+        fontWeight: FontWeight.w500);
+
     ScaffoldMessenger.of(Get.context!).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 4),
@@ -63,7 +74,7 @@ class Toast {
             Expanded(
               child: Text(
                 message.tr,
-                style: onSuccess,
+                style: onFail,
               ),
             )
           ],

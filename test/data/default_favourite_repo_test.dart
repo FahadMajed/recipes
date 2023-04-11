@@ -11,7 +11,7 @@ void main() {
     await Hive.openBox("favourite_recipes");
   });
 
-  final favRepo = DeafaultFavouriteRecipesRepository();
+  final favRepo = DefaultFavouriteRecipesRepository();
   test('should save favourite recipe', () async {
     favRepo.addFavouriteRecipe(Recipe(name: "Toast"));
 

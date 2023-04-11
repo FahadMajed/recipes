@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:recipes/features/onboarding/1_features/onboarding_pages_modal.dart';
-
-import 'package:recipes/packages/utilities/base_classes/base_view_controller.dart';
+import 'package:recipes/lib.dart';
 
 class LandingController extends ViewController with PageViewController {
+  final UserRepository userRepository = UserRepository();
+
   LandingController(super.read) {
     page = const PageModel(
       numberOfPages: 3,
@@ -21,6 +21,13 @@ class LandingController extends ViewController with PageViewController {
       builder: (_) => const OnBoardingPagesModal(),
     );
   }
+
+  Future<bool> checkIfUserCreated() async {
+    return userRepository.userExists();
+  }
 }
+
+final isUserCreatedPvdr =
+    StateProvider<AsyncValue<bool>>((ref) => const AsyncLoading<bool>());
 
 final landingCtrlPvdr = Provider((ref) => LandingController(ref.read));

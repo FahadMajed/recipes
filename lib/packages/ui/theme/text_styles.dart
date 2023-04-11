@@ -1,46 +1,47 @@
 import 'package:flutter/material.dart';
-
-import '../ui.dart';
+import 'package:recipes/packages/ui/theme/colors.dart';
 
 const double fourteen = 14;
 const double twelve = 12;
 
-const reach = TextStyle(
-  color: darkBlue,
+const largeHeading = TextStyle(
   fontWeight: FontWeight.w600,
-  fontSize: 72,
+  fontSize: 40,
+  color: textColor,
 );
+//title med
 const appBar = TextStyle(
   color: Colors.black,
   fontWeight: FontWeight.w400,
   fontSize: 18,
 );
 
+//title large
 const buttomButton = TextStyle(
-  color: Colors.white,
+  color: textColor,
   fontSize: 20,
   fontWeight: FontWeight.w600,
 );
 
-final textButton = TextStyle(
+const textButton = TextStyle(
   color: secondaryColor,
   fontSize: fourteen,
   fontWeight: FontWeight.bold,
 );
 
-const FilledBottonPrimary = TextStyle(
+const filledBottonPrimary = TextStyle(
+  fontSize: 17,
   color: Colors.white,
-  fontSize: 18,
   fontWeight: FontWeight.w600,
 );
 
-const FilledBottonAccent = TextStyle(
-  color: darkBlue700,
-  fontSize: 18,
+const filledBottonAccent = TextStyle(
+  fontSize: 17,
+  color: textColor,
   fontWeight: FontWeight.w600,
 );
 
-final titleSmall = TextStyle(
+const titleSmall = TextStyle(
   color: Colors.black,
   fontSize: fourteen,
   fontWeight: FontWeight.w500,
@@ -56,7 +57,7 @@ const titleLarge = TextStyle(
   fontWeight: FontWeight.w500,
 );
 
-final titleSmallBold = TextStyle(
+const titleSmallBold = TextStyle(
   color: Colors.black,
   fontSize: fourteen,
   fontWeight: FontWeight.w800,
@@ -65,13 +66,7 @@ final titleSmallBold = TextStyle(
 const titleMidBold = TextStyle(
   color: Colors.black,
   fontSize: 16,
-  fontWeight: FontWeight.w800,
-);
-
-const titleMidBoldBlue = TextStyle(
-  color: secondaryColor,
-  fontSize: 16,
-  fontWeight: FontWeight.w800,
+  fontWeight: FontWeight.w600,
 );
 
 const titleLargeBold = TextStyle(
@@ -81,9 +76,9 @@ const titleLargeBold = TextStyle(
 );
 
 const titleExtraLargeBold = TextStyle(
-  color: Colors.black,
-  fontSize: 22,
-  fontWeight: FontWeight.w800,
+  color: textColor,
+  fontSize: 32,
+  fontWeight: FontWeight.w600,
 );
 
 const titleExtraLargeBlueBold = TextStyle(
@@ -104,7 +99,7 @@ const price = TextStyle(
   fontWeight: FontWeight.w700,
 );
 
-final descMedBlack = TextStyle(
+const descMedBlack = TextStyle(
   color: Colors.black,
   fontSize: fourteen,
   fontWeight: FontWeight.w500,
@@ -122,7 +117,7 @@ final descSmall = TextStyle(
   fontWeight: FontWeight.w400,
 );
 
-final descSmallBlack = TextStyle(
+const descSmallBlack = TextStyle(
   color: Colors.black,
   fontSize: twelve,
   fontWeight: FontWeight.w400,
@@ -131,7 +126,7 @@ final descSmallBlack = TextStyle(
 final descMedBold = TextStyle(
   color: Colors.grey[800],
   fontSize: fourteen,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w700,
 );
 
 final descSmallBold = TextStyle(
@@ -146,39 +141,22 @@ final iconLabelSmall = TextStyle(
   color: Colors.grey[800],
 );
 
-final iconLabelMid = TextStyle(
+const iconLabelMid = TextStyle(
   fontSize: fourteen,
   fontWeight: FontWeight.w500,
   color: Colors.black,
 );
 
-const iconLabelLarge = TextStyle(
-  fontSize: 16,
-  fontWeight: FontWeight.w500,
-  color: Colors.black,
-);
-
-final iconLabelSmallBold = TextStyle(
+const iconLabelSmallBold = TextStyle(
   fontSize: twelve,
   fontWeight: FontWeight.w600,
   color: darkBlue900,
 );
 
-final iconLabelMidBoldWhite = TextStyle(
+const iconLabelMidBoldWhite = TextStyle(
   fontSize: fourteen,
   fontWeight: FontWeight.w600,
   color: Colors.white,
-);
-
-final iconLabelMidBoldDark = textButton;
-
-final iconLabelMidDark =
-    iconLabelMidBoldDark.copyWith(fontWeight: FontWeight.w500);
-
-const iconLabelLargeBold = TextStyle(
-  fontSize: 16,
-  fontWeight: FontWeight.w600,
-  color: Colors.black,
 );
 
 const subtitleSmall = TextStyle(
@@ -200,48 +178,11 @@ const subtitleSmallBold = TextStyle(
 const subtitleMidBold = TextStyle(
   fontSize: 11,
   fontWeight: FontWeight.w600,
-  color: Colors.grey,
+  color: textColor,
 );
 
-final selectedText = TextStyle(
+const selectedText = TextStyle(
   color: Colors.white,
   fontSize: twelve,
   fontWeight: FontWeight.bold,
 );
-
-final onSuccess = TextStyle(
-    color: const Color.fromARGB(255, 11, 66, 13),
-    fontSize: fourteen,
-    fontWeight: FontWeight.w500);
-
-final onFail = TextStyle(
-    color: const Color.fromARGB(255, 75, 15, 11),
-    fontSize: fourteen,
-    fontWeight: FontWeight.w500);
-
-
-/*
-  headline3: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-            ),
-            headline4: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w600, color: darkBlue),
-            headline5: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
-            headline6: TextStyle(
-                fontSize: forteen, fontWeight: FontWeight.w500, color: Colors.black),
-            bodyText1: TextStyle(
-                fontSize: forteen, fontWeight: FontWeight.w600, color: Colors.black),
-            bodyText2: TextStyle(
-                fontSize: forteen, fontWeight: FontWeight.w500, color: Colors.black),
-            subtitle1: TextStyle(
-                fontSize: forteen, fontWeight: FontWeight.w300, color: Colors.black),
-            subtitle2: TextStyle(
-                fontSize: twelve, fontWeight: FontWeight.w300, color: darkBlue900),
-            overline: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
-            caption: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
-*/
